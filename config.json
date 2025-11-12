@@ -1,0 +1,12 @@
+{
+    "hotkey": {
+        "modifiers": ["ctrl", "alt", "shift"],
+        "base_keys": ["f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11"]
+    },
+    "debounce_seconds": 0.5,
+    "poll_interval": 0.1,
+    "poll_move_threshold": 1.0,
+    "debug": false,
+    "server_port": 9876,
+    "server_bind": "0.0.0.0"
+}

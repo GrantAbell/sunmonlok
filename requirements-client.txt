@@ -1,0 +1,4 @@
+# Client requirements (streaming device)
+# The client presses keyboard shortcuts when receiving monitor IDs from the server
+
+pynput>=1.7.6

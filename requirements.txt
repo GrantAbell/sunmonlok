@@ -1,0 +1,5 @@
+# Server requirements (Hyprland host)
+screeninfo>=0.8.1
+
+# Note: The server primarily uses Hyprland's hyprctl for mouse/monitor detection.
+# These packages are fallbacks for non-Hyprland systems or edge cases and can be omitted on Hyprland.
