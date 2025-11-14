@@ -1,4 +1,4 @@
-# Monitor Mouse Lock - Client/Server Architecture
+# SunMonLok - Client/Server Architecture
 
 Automatic monitor switching for Sunshine game streaming based on mouse position using **Sunshine's native monitor ordering**.
 
