@@ -1,0 +1,100 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sunmonlok"
+version = "1.0.0"
+description = "Automatic monitor switching for Sunshine game streaming based on mouse position"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Grant Abell", email = "grant@abellpros.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Hardware",
+    "Topic :: Games/Entertainment",
+]
+keywords = ["sunshine", "streaming", "monitor", "hyprland", "gaming"]
+requires-python = ">=3.8"
+dependencies = [
+    "screeninfo>=0.8.1",
+]
+
+[project.optional-dependencies]
+client = [
+    "pynput>=1.7.6",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/GrantAbell/sunmonlok"
+"Bug Reports" = "https://github.com/GrantAbell/sunmonlok/issues"
+"Source" = "https://github.com/GrantAbell/sunmonlok"
+
+[project.scripts]
+sunmonlok = "sunmonlok:main"
+sunmonlok-server = "sunshine_mmlock.__main__:main"
+sunmonlok-client = "client:main"
+
+[tool.setuptools.packages.find]
+include = ["sunshine_mmlock*"]
+
+[tool.setuptools.package-data]
+sunshine_mmlock = ["*.json"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    ".",
+]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

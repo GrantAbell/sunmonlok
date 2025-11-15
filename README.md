@@ -30,7 +30,7 @@ Sunshine streaming requires keyboard shortcuts to be pressed **on the client sid
 systemctl status sunshine
 
 # Start the server
-python -m mlock
+python -m sunshine_mmlock
 
 # Server will parse Sunshine logs and show mapping:
 # INFO - HDMI-A-1 → Sunshine Monitor 0 (F1)
@@ -53,42 +53,81 @@ python test_mapping.py
 journalctl -xe --no-pager -n 1000 | grep -A 10 "Start of Wayland monitor list"
 ```
 
-## Installation
+## One-Command Installation
 
-### Server (Sunshine Host - Linux/Hyprland)
+### 🚀 Quick Setup (Recommended)
 
 ```bash
-# Clone repository
-cd monitor_mouse_lock
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure (optional)
-nano config.json
+# Clone and auto-install everything
+git clone https://github.com/GrantAbell/sunmonlok.git
+cd sunmonlok
+./setup.sh
 ```
 
-**Requirements**:
+This installs the package with all dependencies and creates convenient commands.
+
+### 🎮 Running
+
+**Server (Sunshine Host)**:
+```bash
+sunmonlok                    # Universal launcher (runs server by default)
+# or
+sunmonlok server            # Explicit server mode  
+# or
+python -m sunshine_mmlock             # Direct module execution
+```
+
+**Client (Streaming Device)**:
+```bash
+sunmonlok client --host 192.168.1.100    # Universal launcher
+# or  
+sunmonlok-client --host 192.168.1.100    # Direct client command
+# or
+python client.py --host 192.168.1.100    # Direct script execution
+```
+
+### 🛠️ Development
+
+```bash
+# Development commands via Makefile
+make install-all            # Install everything for development
+make run-server             # Start server
+HOST=192.168.1.100 make run-client  # Start client
+
+# Or install manually
+pip install -e ".[client,dev]"
+```
+
+### 📋 Requirements
+
+**Server (Sunshine Host)**:
 - Linux with Hyprland compositor
 - Sunshine streaming server running
 - `hyprctl` command available (comes with Hyprland)
+- Python 3.8+
 
-### Client (Streaming Device - macOS/Windows/Linux)
+**Client (Streaming Device)**:
+- Python 3.8+
+- Any OS (macOS/Windows/Linux)
 
-```bash
-# Install client dependencies
-pip install -r requirements-client.txt
-
-# Copy client.py to your streaming device (or clone the whole repo)
-```
-
-**macOS**: You must grant Accessibility permissions:
+**macOS Client Setup**: Grant Accessibility permissions:
 1. System Preferences → Security & Privacy → Privacy → Accessibility
 2. Add Terminal or Python to the allowed apps
+
+### 🔧 Manual Installation (Advanced)
+
+If you prefer manual control:
+
+```bash
+# Server dependencies only
+pip install -r requirements.txt
+
+# Client dependencies only  
+pip install -r requirements-client.txt
+
+# Development dependencies
+pip install -r requirements-dev.txt
+```
 
 ## Configuration
 
@@ -142,7 +181,7 @@ python client.py --host 192.168.1.100 --port 9876 --debug
 
 ```bash
 # Run the server
-python -m mlock
+python -m sunshine_mmlock
 
 # The server output (yours will likely vary):
 # INFO - Starting Monitor Mouse Lock Server...
@@ -214,7 +253,7 @@ The server will automatically parse these logs and map coordinates to the correc
 │  Sunshine Host (Linux/Hyprland)                    │
 │                                                    │
 │  ┌──────────────────────────────────────────────┐ │
-│  │  Server (python -m mlock)                    │ │
+│  │  Server (python -m sunshine_mmlock)          │ │
 │  │                                              │ │
 │  │  1. Parse Sunshine logs (journalctl)        │ │
 │  │     → Get monitor order: HDMI-A-1=0, DP-1=1 │ │
@@ -253,8 +292,8 @@ The server will automatically parse these logs and map coordinates to the correc
 ### File Structure
 
 ```
-monitor_mouse_lock/
-├── mlock/                       # Server package (renamed from 'src')
+sunmonlok/
+├── sunshine_mmlock/             # Server package (renamed from 'mlock')
 │   ├── __main__.py              # Server entry point
 │   ├── config.py                # Configuration loader
 │   ├── mapper.py                # Coordinate-to-monitor mapping (Sunshine + position-based)
