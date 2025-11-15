@@ -7,7 +7,7 @@ This simulates a client connecting and receiving monitor IDs.
 
 import socket
 import time
-from mlock.protocol import receive_monitor_switch
+from sunshine_mmlock.protocol import receive_monitor_switch
 
 def test_client(host='localhost', port=9876):
     """Test connecting to server and receiving monitor IDs."""

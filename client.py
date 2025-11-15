@@ -27,7 +27,7 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-from mlock.protocol import receive_monitor_switch, DEFAULT_PORT
+from sunshine_mmlock.protocol import receive_monitor_switch, DEFAULT_PORT
 """
 Network protocol for monitor switch notifications.
 
