@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Test script to verify monitor ID mapping."""
 
-from mlock.hyprland_monitor import get_hyprland_monitors
-from mlock.sunshine_monitor import parse_sunshine_monitors, create_sunshine_monitor_map
-from mlock.mapper import get_monitor_from_xy_sunshine, initialize_sunshine_mapping
+from sunshine_mmlock.hyprland_monitor import get_hyprland_monitors
+from sunshine_mmlock.sunshine_monitor import parse_sunshine_monitors, create_sunshine_monitor_map
+from sunshine_mmlock.mapper import get_monitor_from_xy_sunshine, initialize_sunshine_mapping
 
 def main():
     print("=== Sunshine Monitor Mapping ===\n")
