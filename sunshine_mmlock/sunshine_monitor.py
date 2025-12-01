@@ -4,7 +4,7 @@ import logging
 import subprocess
 from typing import List, Dict, Optional
 from pathlib import Path
-
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -85,16 +85,17 @@ def parse_sunshine_monitors_from_journalctl() -> List[SunshineMonitor]:
         
         # Extract just the monitor list content
         monitor_section = last_section.split('--------- End of Wayland monitor list ---------')[0]
-        
+        print(monitor_section)
         # Parse monitor lines
         # Expected formats:
         # "Monitor 0 is HDMI-A-1: XXX Projector (HDMI-A-1)"
         # "Monitor 2 is SUNSHINE:"  (virtual display with no description)
         monitors = []
-        monitor_pattern = r'Monitor (\d+) is ([A-Z]+-?[A-Z]*-?\d*|[A-Z]+):(.*)$'
+        monitor_pattern = r'Monitor (\d+) is (.*):(.*)$'
         
         for line in monitor_section.split('\n'):
             match = re.search(monitor_pattern, line)
+            print(match)
             if match:
                 index = int(match.group(1))
                 name = match.group(2).strip()
